@@ -1,16 +1,18 @@
 import pandas as pd
 import math 
 
-# read file in 
-df = pd.read_csv("manual_tag_data/manual_0.csv")
+# # read file in 
+# df = pd.read_csv("manual_tag_data/manual_0.csv")
 
-# adding one more column to the df
-data = df
-data["Tagged_Sentence"] = "_"
+# # adding one more column to the df
+# data = df
+# data["Tagged_Sentence"] = "_"
 
-# export to something new //mayb can skip this one to prevent any overwritting 
-data.to_csv("tagged_data/manual_0_tagged.csv", index = False)
-data = pd.read_csv("tagged_data/manual_0_tagged.csv")
+# # export to something new //mayb can skip this one to prevent any overwritting 
+# data.to_csv("tagged_data/manual_0_tagged.csv", index = False)
+
+# read in file with "-" on tagged column
+data = pd.read_csv("to_tag_data/manual_0_tagged.csv")
 
 # start the process of tagging
 count = 0
@@ -46,5 +48,14 @@ for i in range(len(data)):
     count+=1
     if count==2:
         break
+
+
+filename = input('Enter a new filename to save tagged data and prevent overwrite:')
+data.to_csv(filename + ".csv", index=False)
+
+from datetime import datetime
+# datetime object containing current date and time
+now = datetime.now()
+data.to_csv(str(now) + ".csv", index=False)
 
 print("- end of sys -")
